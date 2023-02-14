@@ -1,0 +1,41 @@
+[package]
+name = "snip-721"
+version = "0.1.0"
+authors = ["bill wincer"]
+edition = "2018"
+
+exclude = [
+  # Those files are rust-optimizer artifacts. You might want to commit them for convenience but they should not be part of the source code publication.
+  "contract.wasm",
+  "hash.txt",
+]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+# for quicker tests, cargo test --lib
+# for more explicit tests, cargo test --features=backtraces
+backtraces = ["cosmwasm-std/backtraces"]
+
+[dependencies]
+cosmwasm-std = { package = "secret-cosmwasm-std", version = "1.0.0" }
+cosmwasm-storage = { package = "secret-cosmwasm-storage", version = "1.0.0" }
+secret-toolkit = { version = "0.6.0", default-features = false, features = ["storage", "serialization", "utils", "permit"] }
+serde-json-wasm = "0.4.1"
+schemars = "0.8.11"
+serde = { version = "1.0.114", default-features = false, features = ["derive"] }
+snafu = { version = "0.7.2" }
+bincode2 = "2.0.1"
+subtle = { version = "2.2.3", default-features = false }
+base64 = "0.13.0"
+hex = "0.4.2"
+primitive-types = { version = "0.12.0", default-features = false }
+rand_chacha = { version = "0.2.2", default-features = false }
+rand_core = { version =  "0.5.1", default-features = false }
+sha2 = { version = "0.10.6", default-features = false }
+
+[dev-dependencies]
+cosmwasm-schema = "1.1.4"
